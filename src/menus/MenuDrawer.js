@@ -1,17 +1,17 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
+
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import PersonIcon from '@mui/icons-material/Person';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import TodayIcon from '@mui/icons-material/Today';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 
 import { useHistory } from "react-router-dom";
 
@@ -48,7 +48,9 @@ export default function MenuDrawer(props) {
           <ListItemText primary="Statistics" />
         </ListItem>
       </List>
+
       <Divider />
+      
       <List>
         <ListItem button onClick={ () => history.push("/profile") }>
             <ListItemIcon>
@@ -56,7 +58,14 @@ export default function MenuDrawer(props) {
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-        </List>
+          
+        <ListItem button onClick={ () => history.push("/scan") }>
+            <ListItemIcon>
+              <QrCodeScannerIcon />
+            </ListItemIcon>
+            <ListItemText primary="Scan a code" />
+          </ListItem>
+      </List>
     </Box>
   );
 

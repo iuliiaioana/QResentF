@@ -5,8 +5,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import MenuDrawer from './MenuDrawer'
+import { useHistory } from "react-router-dom";
+
+import MenuIcon from '@mui/icons-material/Menu';
+import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 
 export default function MenuBar() {
 
@@ -21,6 +24,8 @@ export default function MenuBar() {
 
     setState({ openDrawer: open });
   };
+
+  let history = useHistory();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -39,7 +44,17 @@ export default function MenuBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             QResent
           </Typography>
-          <Button color="inherit">Login</Button>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="scan"
+            sx={{ mr: 2 }}
+            onClick={ () => history.push("/scan") }
+          >
+            <QrCodeScannerIcon />
+          </IconButton>
+          <Button color="inherit" onClick={ () => history.push("/login") }>Login</Button>
         </Toolbar>
         <MenuDrawer open={state.openDrawer} toggleFunction={toggleDrawer}></MenuDrawer>
       </AppBar>
