@@ -1,0 +1,27 @@
+$breakpoint-mobile: 1200px;
+
+.container {
+    margin-left: 35%;
+    margin-top: 10%;
+    width: 30%;
+    // border: 1px solid red;
+
+    .FormControl {
+        width: 100%;
+
+        h2 {
+            text-align: center;
+        }
+    }
+
+    .MuiButtonBase-root {
+        width: 50%;
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .container {
+        margin-left: 10%;
+        width: 80%;
+    }
+}

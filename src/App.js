@@ -1,17 +1,22 @@
 import './App.css';
-import * as React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import MenuBar from './menus/MenuBar';
 
 import Calendar from './routes/Calendar';
 import Scan from './routes/Scan';
-import Login from './routes/Login';
+import Login from './routes/login/Login';
 import Statistics from './routes/Statistics';
 import Subjects from './routes/Subjects';
 import Profile from './routes/Subjects';
 
+import useToken from './useToken';
+
 function App() {
+
+  const { token, setToken } = useToken();
+
   return (
     <div>
       <Router>
@@ -22,7 +27,7 @@ function App() {
               
             </Route>
             <Route path="/login">
-              <Login />
+              <Login setToken={setToken} />
             </Route>
             <Route path="/subjects">
               <Subjects />
