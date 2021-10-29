@@ -1,0 +1,53 @@
+$breakpoint-mobile: 1200px;
+
+div {
+    // border: 2px solid red;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    // border: 2px solid green;
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 2%;
+
+    .column-container {
+        display: flex;
+        flex-direction: row;
+        // border: 2px solid blue;
+        justify-content: space-between;
+        width: 100%;
+
+        &:nth-child(1) {
+            .cell-item {
+                &:nth-child(1) {
+                    // profile picture
+                    flex: 1;
+                    img {
+                        width: 100%;
+                    }
+                }
+                &:nth-child(2) {
+                    // name/class info
+                    flex: 4;
+                    padding: 2%;
+                    h2, h3, h4 {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
+        &:nth-child(2) {
+            padding: 2%;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .flex-container {
+        margin-left: 0%;
+        width: 100%;
+    }
+}

@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 import PropTypes from 'prop-types';
+import { useHistory } from "react-router-dom";
 
 async function sendLoginRequest(credentials) {
   return fetch('http://127.0.0.1:5000/login', {
@@ -17,13 +18,21 @@ async function sendLoginRequest(credentials) {
     },
     body: JSON.stringify(credentials)
   })
-    .then(data => data.json())
+    .then(data => {
+      if (!data.ok)  {
+        return;
+      }
+      return data.json();
+    }); 
  }
 
-export default function Login({ setToken }) {
+export default function Login(props) {
+
+  let history = useHistory();
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [loginError, setLoginError] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -31,7 +40,13 @@ export default function Login({ setToken }) {
       email,
       password
     });
-    setToken(token);
+    if (token !== undefined) {
+      props.setToken(token);
+      setLoginError(false);
+      history.push("/profile");
+    } else {
+      setLoginError(true);
+    }
   }
   
   return (
@@ -56,6 +71,7 @@ export default function Login({ setToken }) {
           <Button variant="outlined">Sign up</Button>
           <Button variant="contained" onClick={handleSubmit}>Log in</Button>
         </Stack>
+        {loginError === true ? <p className="error-message">Error: credentials do not match</p> : ""}
       </FormControl>
     </div>
   );

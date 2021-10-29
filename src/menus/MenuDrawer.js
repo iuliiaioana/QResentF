@@ -12,6 +12,7 @@ import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import TodayIcon from '@mui/icons-material/Today';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import { useHistory } from "react-router-dom";
 
@@ -19,7 +20,7 @@ export default function MenuDrawer(props) {
 
   let history = useHistory();
 
-  const list = () => (
+  const studentList = () => (
     <Box
       sx="250"
       role="presentation"
@@ -53,21 +54,38 @@ export default function MenuDrawer(props) {
       
       <List>
         <ListItem button onClick={ () => history.push("/profile") }>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </ListItem>
+          <ListItemIcon>
+            <PersonIcon />
+          </ListItemIcon>
+          <ListItemText primary="Profile" />
+        </ListItem>
           
         <ListItem button onClick={ () => history.push("/scan") }>
-            <ListItemIcon>
-              <QrCodeScannerIcon />
-            </ListItemIcon>
-            <ListItemText primary="Scan a code" />
-          </ListItem>
+          <ListItemIcon>
+            <QrCodeScannerIcon />
+          </ListItemIcon>
+          <ListItemText primary="Scan a code" />
+        </ListItem>
+    
+        <ListItem button onClick={ () => logout(history) }>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary="Log out" />
+        </ListItem>
       </List>
     </Box>
   );
+
+  const switchList = () => {
+    switch (localStorage.getItem('account_type')) {
+      case 'student':
+        return studentList();
+      default:
+        // return notLoggedInList();
+        return studentList();
+    }
+  }
 
   return (
     <div>
@@ -76,8 +94,14 @@ export default function MenuDrawer(props) {
           open={props.open}
           onClose={props.toggleFunction(false)}
         >
-          {list()}
+          {studentList()}
         </Drawer>
     </div>
   );
+}
+
+function logout(history) {
+  localStorage.removeItem("token");
+  localStorage.setItem("status", "notLogged");
+  history.push("/login");
 }

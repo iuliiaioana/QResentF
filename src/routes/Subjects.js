@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default function Profile() {
+export default function Subjects() {
 
   return (
     <div>

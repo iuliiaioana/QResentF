@@ -12,10 +12,19 @@ $breakpoint-mobile: 1200px;
         h2 {
             text-align: center;
         }
+
+        .error-message  {
+            text-align: center;
+            font-weight: bold;
+        }
     }
 
     .MuiButtonBase-root {
         width: 50%;
+    }
+
+    .error-message {
+        color: red;
     }
 }
 

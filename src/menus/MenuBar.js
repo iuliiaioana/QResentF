@@ -3,13 +3,13 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuDrawer from './MenuDrawer'
 import { useHistory } from "react-router-dom";
 
 import MenuIcon from '@mui/icons-material/Menu';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
+import PersonIcon from '@mui/icons-material/Person';
 
 export default function MenuBar() {
 
@@ -49,12 +49,16 @@ export default function MenuBar() {
             edge="start"
             color="inherit"
             aria-label="scan"
-            sx={{ mr: 2 }}
             onClick={ () => history.push("/scan") }
           >
             <QrCodeScannerIcon />
           </IconButton>
-          <Button color="inherit" onClick={ () => history.push("/login") }>Login</Button>
+          <IconButton size="large"
+            color="inherit"
+            aria-label="scan"
+            onClick={ () => history.push("/profile") }>
+            <PersonIcon />
+          </IconButton>
         </Toolbar>
         <MenuDrawer open={state.openDrawer} toggleFunction={toggleDrawer}></MenuDrawer>
       </AppBar>

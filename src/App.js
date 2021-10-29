@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 import MenuBar from './menus/MenuBar';
 
@@ -9,11 +10,13 @@ import Scan from './routes/Scan';
 import Login from './routes/login/Login';
 import Statistics from './routes/Statistics';
 import Subjects from './routes/Subjects';
-import Profile from './routes/Subjects';
+import Profile from './routes/profile/Profile';
 
 import useToken from './useToken';
 
 function App() {
+
+  let history = useHistory();
 
   const { token, setToken } = useToken();
 
@@ -23,8 +26,8 @@ function App() {
         <MenuBar />
         <div className="content">
           <Switch>
-            <Route path ="/home">
-              
+            <Route exact path ="/">
+              <Calendar />
             </Route>
             <Route path="/login">
               <Login setToken={setToken} />
