@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import MenuBar from './menus/MenuBar';
 
 import Calendar from './routes/Calendar';
-import Scan from './routes/Scan';
+import Scan from './routes/scan/Scan';
 import Login from './routes/login/Login';
 import Statistics from './routes/Statistics';
 import Subjects from './routes/Subjects';
