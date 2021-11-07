@@ -1,4 +1,15 @@
+$breakpoint-mobile: 1200px;
+
 .qr-code {
-    width: 60%;
-    
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    height: 30%;
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .qr-code {
+        width: 50%;
+        height: 50%;
+    }
 }

@@ -6,11 +6,13 @@ import { useHistory } from "react-router-dom";
 import MenuBar from './menus/MenuBar';
 
 import Calendar from './routes/Calendar';
-import Scan from './routes/scan/Scan';
 import Login from './routes/login/Login';
 import Statistics from './routes/Statistics';
 import Subjects from './routes/Subjects';
 import Profile from './routes/profile/Profile';
+
+import Scan from './routes/scan/Scan';
+import Generate from './routes/scan/Generate';
 
 import useToken from './useToken';
 
@@ -46,6 +48,9 @@ function App() {
             </Route>
             <Route path="/scan">
               <Scan />
+            </Route>
+            <Route path="/generate">
+              <Generate />
             </Route>
           </Switch>
         </div>
