@@ -43,7 +43,9 @@ export default function Generate() {
         }, []);
     
 
-    let qrValue =  activityId + "," + dateTime;
+ //   let qrValue =  activityId + "," + dateTime;
+        
+    let qrValue =  "12," + dateTime;
 
     const handleGenerate = async data => {
         setIsOpened(true);

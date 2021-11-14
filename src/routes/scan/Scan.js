@@ -37,10 +37,11 @@ function SimpleDialog(props) {
 export default function Scan() {
 
     const [scan, setScan] = useState("no result");
+    const [oldScans, setOldScans] = useState(["no result"]);
     const [oldScan, setOldScan] = useState("no result");
     const [scanError, setScanError] = useState(false);
 
-    // invalid qr popup
+    // qr response popupus
     const [open, setOpen] = React.useState(false);
     const handleClose = (value) => {
         setOpen(false);
@@ -49,23 +50,28 @@ export default function Scan() {
     const handleScan = async data => {
         if (data) {
             setScan(data);
-            if (data !== oldScan) {
-                console.log("data: " + data + " old " + oldScan);
+            if (!oldScans.includes(data)) {
+                console.log(oldScans);
+                let aux = oldScans;
+                aux.push(data)
+                setOldScans(aux);
                 setOldScan(data);
                 const beans = data.split(',');
                 const err = await sendQRCode({
                     activitate_id: beans[0],
                     ora_qr: beans[1],
-                    user_id: "1mock1" // localStorage.getItem('id_user');
+                    user_id: "2" // localStorage.getItem('id_user');
                 });
+                setOpen(true);
                 if (err === undefined) {
                     setScanError(true);
-                    setOpen(true);
                 } else {
-                    if (scanError === true) {
-                        setOpen(true);
-                    }
-                    setScanError(false)
+                    setScanError(false);
+                }
+            } else {
+                if (oldScan !== data) {
+                    setOpen(true);
+                    setScanError(true);
                 }
             }
         }
