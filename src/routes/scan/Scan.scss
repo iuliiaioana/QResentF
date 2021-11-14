@@ -13,6 +13,12 @@ $breakpoint-mobile: 1200px;
     text-align: center;
 }
 
+.pop-up {
+    display: flex;
+    margin-bottom: 100px;
+}
+
+
 @media (max-width: $breakpoint-mobile) {
     .qr-code {
         width: 50%;
