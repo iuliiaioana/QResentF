@@ -1,11 +1,23 @@
 $breakpoint-mobile: 1200px;
 
 .qr-code {
+    display: flex;
+    margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
     width: 30%;
     height: 30%;
 }
+
+.info {
+    text-align: center;
+}
+
+.pop-up {
+    display: flex;
+    margin-bottom: 100px;
+}
+
 
 @media (max-width: $breakpoint-mobile) {
     .qr-code {
