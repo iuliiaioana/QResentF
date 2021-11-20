@@ -84,6 +84,7 @@ export default function Statistics() {
   const getStatistics = (body) =>{
 
     getStatisticsFromServer(body).then(res =>{
+      if(res.status === 200){
        res.json().then(res =>{
          console.log(res)
          let l1 = []
@@ -108,6 +109,7 @@ export default function Statistics() {
          setBarOptions(bar)
 
        })
+      }
     })
   }
 
