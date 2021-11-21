@@ -117,7 +117,7 @@ const AddNewActivityForm = ({ visible, onCreate, onCancel }) => {
                   }
               >
                   <Select>{
-                  ['8-10','10-12','12-14','14-16','16-18','18-20'].map((item,index)=>{
+                  ['8:10','10:12','12:14','14:16','16:18','18:20'].map((item,index)=>{
                       return <Option value={item} key={index}>{item}</Option>
                   })
                     }
