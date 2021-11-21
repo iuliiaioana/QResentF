@@ -8,6 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PersonIcon from '@mui/icons-material/Person';
+import ListIcon from '@mui/icons-material/List';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import TodayIcon from '@mui/icons-material/Today';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
@@ -40,6 +41,13 @@ export default function MenuDrawer(props) {
             <TodayIcon />
           </ListItemIcon>
           <ListItemText primary="Calendar" />
+        </ListItem>
+
+        <ListItem button onClick={ () => history.push("/attendance-list") }>
+          <ListItemIcon>
+              <ListIcon />
+          </ListItemIcon>
+          <ListItemText primary="Attendance List" />
         </ListItem>
 
         <ListItem button onClick={ () => history.push("/statistics") }>

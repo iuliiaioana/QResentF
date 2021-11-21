@@ -1,0 +1,18 @@
+$breakpoint-mobile: 1200px;
+
+.container {
+    display: inline-list-item;
+    justify-content: center;
+    position: absolute;
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .container {
+        margin-left: 50%;
+        width: 80%;
+    }
+}
+
+//.container.MuiButtonBase-root {
+//    width: 100%;
+//}

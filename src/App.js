@@ -5,8 +5,9 @@ import { useHistory } from "react-router-dom";
 
 import MenuBar from './menus/MenuBar';
 
-import Calendar from './routes/Calendar';
+import Calendar from './routes/calendar/Calendar';
 import Login from './routes/login/Login';
+import AttendanceList from './routes/attendance-list/AttendanceList';
 import Statistics from './routes/Statistics';
 import Subjects from './routes/Subjects';
 import Profile from './routes/profile/Profile';
@@ -39,6 +40,9 @@ function App() {
             </Route>
             <Route path="/calendar">
               <Calendar />
+            </Route>
+            <Route path="/attendance-list">
+              <AttendanceList />
             </Route>
             <Route path="/statistics">
               <Statistics />
