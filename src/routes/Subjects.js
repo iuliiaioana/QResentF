@@ -12,7 +12,7 @@ import {
 
 const {Paragraph} = Typography
 const {Panel} = Collapse
-
+const {Option} = Select
 const AddNewSubjectForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm();
   return (
@@ -43,7 +43,7 @@ const AddNewSubjectForm = ({ visible, onCreate, onCancel }) => {
           >
               <Form.Item
                   label="Subject name"
-                  name="subjectName"
+                  name="nume"
                   rules={
                       [
                           {
@@ -58,26 +58,12 @@ const AddNewSubjectForm = ({ visible, onCreate, onCancel }) => {
 
               <Form.Item
                   label="Subject Description"
-                  name="subjectDescription"
+                  name="descriere"
                   rules={
                       [
                           {
                               required: true,
                               //message: setLocale("ai_trainer.extractor.modal.name.mesasage")
-                          }
-                      ]
-                  }
-              >
-                  <Input />
-              </Form.Item>
-              <Form.Item
-                  label="Subject Time"
-                  name="subjectTime"
-                  rules={
-                      [
-                          {
-                              required: true,
-                              // message: setLocale("ai_trainer.extractor.modal.name.mesasage")
                           }
                       ]
                   }
@@ -120,7 +106,7 @@ const AddNewActivityForm = ({ visible, onCreate, onCancel }) => {
           >
               <Form.Item
                   label="Interval"
-                  name="activityInterval"
+                  name="interval"
                   rules={
                       [
                           {
@@ -130,12 +116,17 @@ const AddNewActivityForm = ({ visible, onCreate, onCancel }) => {
                       ]
                   }
               >
-                  <Input />
+                  <Select>{
+                  ['8-10','10-12','12-14','14-16','16-18','18-20'].map((item,index)=>{
+                      return <Option value={item} key={index}>{item}</Option>
+                  })
+                    }
+                  </Select>
               </Form.Item>
 
               <Form.Item
                   label="Zi"
-                  name="activityDay"
+                  name="zi"
                   rules={
                       [
                           {
@@ -145,11 +136,16 @@ const AddNewActivityForm = ({ visible, onCreate, onCancel }) => {
                       ]
                   }
               >
-                  <Input />
+                  <Select>{
+                  ['luni','marti','miercuri','joi','vineri'].map((item,index)=>{
+                      return <Option value={item} key={index}>{item}</Option>
+                  })
+                    }
+                  </Select>
               </Form.Item>
               <Form.Item
                   label="Grupa"
-                  name="activityGroup"
+                  name="grupa"
                   rules={
                       [
                           {
@@ -172,6 +168,7 @@ export default function Subjects() {
   const [subjects, setSubjects] = useState([])
   const [modalVisibleAddNew, setModalVisibleAddNew] = useState(false)
   const [modalVisibleAddNewActivity, setModalVisibleAddNewActivity] = useState(false)
+  const [activeSubjectID, setActiveSubjectID] = useState(-1)
 
 
   const getSubjectsFromServer = async () =>{
@@ -210,11 +207,12 @@ const showModalAddNewActivity = () => {
 
 
 const closeModalAddNewActivity = () => {
+    setActiveSubjectID(-1)
   setModalVisibleAddNewActivity(false)
 }
 
 const addSubjectToServer = async (values) => {
-  const res = await fetch('Dummy_url', {
+  const res = await fetch('http://localhost:5000/materii', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
@@ -244,12 +242,12 @@ const addSubject = (values) => {
 }
 
 const addActivityToServer = async (values) => {
-  const res = await fetch('Dummy_url', {
+  const res = await fetch('http://localhost:5000/activitati', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
       },
-      body: JSON.stringify(values)
+      body: JSON.stringify({...values,id_materie:activeSubjectID})
   }
   );
   return res
@@ -288,7 +286,7 @@ const addActivity = (values) => {
               <Row gutter={3} justify="space-between">
                 {
                 subjects.map(item =>{
-                  console.log(item)
+                  let id_materie = item.id
                   return <Col span={8} >
                   <Card 
                   title={item.nume}>
@@ -320,6 +318,7 @@ const addActivity = (values) => {
                           <Button 
                           type="primary"
                               onClick={() => {
+                                setActiveSubjectID(id_materie)
                                 showModalAddNewActivity()
                               }}>
                               {'Add new activity'}</Button>

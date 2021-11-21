@@ -109,6 +109,23 @@ export default function Statistics() {
          setBarOptions(bar)
 
        })
+      }else{
+        setDonutOptions({'series':[],labels:[]})
+        setBarOptions({options: {
+          chart: {
+            id: "basic-bar"
+          },
+          xaxis: {
+            categories: []
+          }
+        },
+        series: [
+          {
+            name: "Prof per Activitate",
+            data: []
+          }
+        ]
+      })
       }
     })
   }
