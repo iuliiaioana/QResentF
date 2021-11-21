@@ -68,7 +68,7 @@ export default function MenuDrawer(props) {
           <ListItemText primary="Profile" />
         </ListItem>
           
-        <ListItem button onClick={ () => history.push("/scan") }>
+        <ListItem button onClick={ () => history.push("/qr") }>
           <ListItemIcon>
             <QrCodeScannerIcon />
           </ListItemIcon>

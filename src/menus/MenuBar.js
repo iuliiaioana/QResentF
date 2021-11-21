@@ -49,7 +49,7 @@ export default function MenuBar() {
             edge="start"
             color="inherit"
             aria-label="scan"
-            onClick={ () => history.push("/scan") }
+            onClick={ () => history.push("/qr") }
           >
             <QrCodeScannerIcon />
           </IconButton>

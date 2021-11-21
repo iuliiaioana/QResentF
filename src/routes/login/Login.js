@@ -68,8 +68,8 @@ export default function Login(props) {
                 />
                 <br />
                 <Stack spacing={2} justifyContent="space-between" alignItems="center" direction="row">
-                    <Button variant="outlined">Sign up</Button>
-                    <Button variant="contained" onClick={handleSubmit}>Log in</Button>
+                    <Button variant="outlined" onClick={ () => history.push("/register") }>Sign up</Button>
+                    <Button variant="contained" onClick={ handleSubmit }>Log in</Button>
                 </Stack>
                 {loginError === true ? <p className="error-message">Error: credentials do not match</p> : ""}
             </FormControl>
