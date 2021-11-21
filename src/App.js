@@ -7,12 +7,12 @@ import MenuBar from './menus/MenuBar';
 
 import Calendar from './routes/Calendar';
 import Login from './routes/login/Login';
+import Register from './routes/register/Register';
 import Statistics from './routes/Statistics';
 import Subjects from './routes/Subjects';
 import Profile from './routes/profile/Profile';
 
-import Scan from './routes/scan/Scan';
-import Generate from './routes/scan/Generate';
+import QrZone from './routes/scan/qrZone';
 
 import useToken from './useToken';
 
@@ -34,6 +34,9 @@ function App() {
             <Route path="/login">
               <Login setToken={setToken} />
             </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
             <Route path="/subjects">
               <Subjects />
             </Route>
@@ -46,11 +49,8 @@ function App() {
             <Route path="/profile">
               <Profile />
             </Route>
-            <Route path="/scan">
-              <Scan />
-            </Route>
-            <Route path="/generate">
-              <Generate />
+            <Route path="/qr">
+              <QrZone />
             </Route>
           </Switch>
         </div>
