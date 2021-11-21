@@ -8,7 +8,6 @@ $breakpoint-mobile: 1200px;
     height: 30%;
 }
 
-
 .flex-container {
     display: flex;
     flex-direction: column;
@@ -26,9 +25,11 @@ $breakpoint-mobile: 1200px;
 
 
 .invisible {
+    display: none;
     visibility: hidden;
+    opacity: 0;
+    clip-path: circle(0);
 }
-
 
 @media (max-width: $breakpoint-mobile) {
     .qr-code {

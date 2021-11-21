@@ -50,36 +50,36 @@ export default function Generate() {
     const handleGenerate = async data => {
         setIsOpened(true);
         setDateTime(new Date().fixTimezone().toISOString());
-        const id = await getActivityId({
-            profesor_id: "3"  // localStorage.getItem('id_user');
-        });
-        console.log(id['activitate_id'])
-        setActivityId(id['activitate_id']);
+        // const id = await getActivityId({
+        //     profesor_id: "3"  // localStorage.getItem('id_user');
+        // });
+        // console.log(id['activitate_id'])
+        // setActivityId(id['activitate_id']);
     }
 
     const handleHide = () => {
         setIsOpened(false);
     }
 
+
     return (
         <div>
             
-            <div className={!isOpened ? "invisible" : ""}>
+            {isOpened && <div data-testid="qr">
                 <p>{qrValue}</p>
                 <QRCode className="qr-code" value={qrValue}  />
-            </div>
+            </div>}
 
             <div className="flex-container"> 
                 <div className="flex-element">
-                    <Button className="button" variant="outlined" onClick={handleHide}>Hide QR</Button>
+                    <Button data-testid="hide" className="button" variant="outlined" onClick={handleHide}>Hide QR</Button>
                 </div>
                 <div className="flex-element">
-                    <Button className="button" variant="contained" onClick={handleGenerate}>Generate QR</Button>
+                    <Button data-testid="gen" className="button" variant="contained" onClick={handleGenerate}>Generate QR</Button>
                 </div>
             </div>
-           
-
+        <div className="invisible" data-testid="var">{isOpened}</div>    
         </div>
-    );
+    );  
 
 }
