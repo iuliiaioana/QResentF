@@ -75,7 +75,7 @@ export default function Admin() {
                     <AddIcon />
                 </IconButton>
                 {users.professors.map((item, index) => {
-                    return <UserEntry userData={item} />
+                    return <UserEntry userData={item} refresh={getData}/>
                 })}
             </div>
         </div>
