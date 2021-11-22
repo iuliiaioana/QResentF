@@ -108,10 +108,12 @@ export default function Statistics() {
          setDonutOptions(donut)
          l1 = []
          l2 = []
-         Object.entries(res.ActDataStatus["28"]["22.11.2021"]).map(([key, value]) => {
-          l1.push(key)
-          l2.push(value)
-         })
+         if (res.ActDataStatus["28"] != undefined) {
+           Object.entries(res.ActDataStatus["28"]["22.11.2021"]).map(([key, value]) => {
+             l1.push(key)
+             l2.push(value)
+            })
+         }
          let actData = {}
          actData['series'] = l2
          actData['labels'] = l1
