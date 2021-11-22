@@ -137,15 +137,6 @@ export default function MenuDrawer(props) {
 
   return (
     <div>
-<<<<<<< HEAD
-      <Drawer
-        anchor="left"
-        open={props.open}
-        onClose={props.toggleFunction(false)}
-      >
-        {studentList()}
-      </Drawer>
-=======
         <Drawer
           anchor="left"
           open={props.open}
@@ -153,7 +144,6 @@ export default function MenuDrawer(props) {
         >
           {switchList()}
         </Drawer>
->>>>>>> 4c2eeb57576e722cfdcc1736f5c54fed2be0715a
     </div>
   );
 }
