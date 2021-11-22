@@ -73,7 +73,7 @@ export default function Generate() {
         <div>
             
             {isOpened && <div data-testid="qr">
-                <p>{!qrValue.includes('undefined') && qrValue}</p>
+                {/* <p>{!qrValue.includes('undefined') && qrValue}</p> */}
                 <QRCode className="qr-code" value={qrValue}  />
             </div>}
 

@@ -21,7 +21,12 @@ import { useHistory } from "react-router-dom";
 export default function MenuDrawer(props) {
 
   let history = useHistory();
-  let token = JSON.parse(localStorage['token']);
+  let user_rol = "";
+  let token;
+  if (localStorage['token'] !== undefined) {
+    token = JSON.parse(localStorage['token']);
+    user_rol = token.user_rol;
+  }
 
   const studentList = () => (
     <Box
@@ -45,13 +50,6 @@ export default function MenuDrawer(props) {
           <ListItemText primary="Calendar" />
         </ListItem>
 
-        <ListItem button onClick={() => history.push("/attendance-list")}>
-          <ListItemIcon>
-            <ListIcon />
-          </ListItemIcon>
-          <ListItemText primary="Attendance List" />
-        </ListItem>
-
         <ListItem button onClick={() => history.push("/statistics")}>
           <ListItemIcon>
             <QueryStatsIcon />
@@ -70,7 +68,7 @@ export default function MenuDrawer(props) {
           <ListItemText primary="Profile" />
         </ListItem>
 
-        {token.user_rol == 'admin' ?
+        {user_rol == 'admin' ?
           <ListItem button onClick={() => history.push("/admin")}>
             <ListItemIcon>
               <AdminPanelSettingsIcon />
@@ -83,7 +81,7 @@ export default function MenuDrawer(props) {
           <ListItemIcon>
             <QrCodeScannerIcon />
           </ListItemIcon>
-          <ListItemText primary="Scan a code" />
+          <ListItemText primary={user_rol == 'student' ? "Scan a code" : "Generate QR"} />
         </ListItem>
 
         <ListItem button onClick={() => logout(history)}>
