@@ -43,13 +43,6 @@ export default function MenuDrawer(props) {
           <ListItemText primary="Calendar" />
         </ListItem>
 
-        <ListItem button onClick={ () => history.push("/attendance-list") }>
-          <ListItemIcon>
-              <ListIcon />
-          </ListItemIcon>
-          <ListItemText primary="Attendance List" />
-        </ListItem>
-
         <ListItem button onClick={ () => history.push("/statistics") }>
           <ListItemIcon>
             <QueryStatsIcon />
@@ -85,12 +78,41 @@ export default function MenuDrawer(props) {
     </Box>
   );
 
+  const professorList = () => (
+    <Box
+        sx="250"
+        role="presentation"
+        onClick={props.toggleFunction(false)}
+        onKeyDown={props.toggleFunction(false)}
+    >
+      <List>
+        <ListItem button onClick={ () => history.push("/attendance-list") }>
+          <ListItemIcon>
+            <ListIcon />
+          </ListItemIcon>
+          <ListItemText primary="Attendance List" />
+        </ListItem>
+      </List>
+
+      <Divider />
+
+      {studentList()}
+    </Box>
+  );
+
   const switchList = () => {
-    switch (localStorage.getItem('account_type')) {
-      case 'student':
-        return studentList();
-      default:
-        // return notLoggedInList();
+    const user_token = JSON.parse(localStorage.getItem("token"));
+    if (user_token != null) {
+      switch (user_token['user_rol']) {
+        case 'student':
+          return studentList(); break;
+        case 'profesor':
+          return professorList(); break;
+        default:
+          // return notLoggedInList();
+          return studentList(); break;
+      }
+    } else {
         return studentList();
     }
   }
@@ -102,7 +124,7 @@ export default function MenuDrawer(props) {
           open={props.open}
           onClose={props.toggleFunction(false)}
         >
-          {studentList()}
+          {switchList()}
         </Drawer>
     </div>
   );
