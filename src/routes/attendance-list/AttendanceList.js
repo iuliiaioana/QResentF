@@ -76,11 +76,11 @@ const downloadTxtFile = async (activityId, date) => {
     const res = await getAttendanceList(activityId, date);
 
     console.log(res);
-    const file = new Blob([JSON.stringify(res, null, 2)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    const file = new Blob([JSON.stringify(res, null, 2)], { type: 'application/json'});
 
     const element = document.createElement("a");
     element.href = URL.createObjectURL(file);
-    element.download = `prezenta${date}.xls`;
+    element.download = `prezenta${date}.json`;
 
     element.click();
 }
