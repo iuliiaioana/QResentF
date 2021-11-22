@@ -169,6 +169,14 @@ export default function Subjects() {
   const [modalVisibleAddNew, setModalVisibleAddNew] = useState(false)
   const [modalVisibleAddNewActivity, setModalVisibleAddNewActivity] = useState(false)
   const [activeSubjectID, setActiveSubjectID] = useState(-1)
+  const [userID] = useState(()=>{
+    let token = JSON.parse(localStorage.getItem('token'));
+    return token['user_id'];
+  })
+  const [rol] = useState(()=>{
+    let token = JSON.parse(localStorage.getItem('token'));
+    return token['user_rol'];
+  })
 
 
   const getSubjectsFromServer = async () =>{
@@ -277,6 +285,14 @@ const addActivity = (values) => {
 
   return (
     <>
+    {rol !== 'student' &&<div style={{marginLeft:'90%', marginTop:'10%'}}>
+                <Button 
+                type="primary"
+                    onClick={() => {
+                      showModalAddNew()
+                    }}>
+                    {'Add new subject'}</Button>
+            </div>}
         <Row style={{marginLeft:'5%'}} gutter="16">
             <PageHeader
               style={{marginLeft:'40px'}}
@@ -314,7 +330,7 @@ const addActivity = (values) => {
                       }
                       </Panel>
                       </Collapse>
-                      <div style={{marginLeft:'60%', marginTop:'10%'}}>
+                     {rol !== 'student' && <div style={{marginLeft:'60%', marginTop:'10%'}}>
                           <Button 
                           type="primary"
                               onClick={() => {
@@ -322,7 +338,7 @@ const addActivity = (values) => {
                                 showModalAddNewActivity()
                               }}>
                               {'Add new activity'}</Button>
-                      </div>
+                      </div>}
                   </Card>
                   </Col>
                 })
@@ -331,14 +347,6 @@ const addActivity = (values) => {
 
               </div>
         </Row>
-        <div style={{marginLeft:'90%', marginTop:'10%'}}>
-                <Button 
-                type="primary"
-                    onClick={() => {
-                      showModalAddNew()
-                    }}>
-                    {'Add new subject'}</Button>
-            </div>
             <AddNewSubjectForm visible={modalVisibleAddNew} onCreate={addSubject} onCancel={closeModalAddNew} />
             <AddNewActivityForm visible={modalVisibleAddNewActivity} onCreate={addActivity} onCancel={closeModalAddNewActivity} />
     </>

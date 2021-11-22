@@ -4,6 +4,7 @@ import QRCode from "react-qr-code";
 import Button from '@mui/material/Button';
 
 import './Generate.scss';
+import { QrcodeOutlined } from '@ant-design/icons';
 
 // GET id_activitate_curenta, parametru = id_profesor
 
@@ -72,7 +73,7 @@ export default function Generate() {
         <div>
             
             {isOpened && <div data-testid="qr">
-                <p>{qrValue}</p>
+                <p>{!qrValue.includes('undefined') && qrValue}</p>
                 <QRCode className="qr-code" value={qrValue}  />
             </div>}
 
@@ -81,9 +82,12 @@ export default function Generate() {
                 <div className="flex-element">
                     <Button data-testid="hide" className="button" variant="outlined" onClick={handleHide}>Hide QR</Button>
                 </div>} 
-                <div className="flex-element">
+                {qrValue.includes('undefined') && <div className="flex-element">
+                    <Button disabled data-testid="gen" className="button" variant="contained" onClick={handleGenerate}>Generate QR</Button>
+                </div>}
+                {!qrValue.includes('undefined') && <div className="flex-element">
                     <Button data-testid="gen" className="button" variant="contained" onClick={handleGenerate}>Generate QR</Button>
-                </div>
+                </div>}
             </div>
         <div className="invisible" data-testid="var">{isOpened}</div>    
         </div>

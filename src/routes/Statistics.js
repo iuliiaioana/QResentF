@@ -22,6 +22,14 @@ export default function Statistics() {
   const [subjects,setSubjects] = useState([])
   const [selectedSubject, setSelectedSubject] = useState(null)
   const [firstHour,setFirstHour] = useState('')
+  const [userID] = useState(()=>{
+    let token = JSON.parse(localStorage.getItem('token'));
+    return token['user_id'];
+  })
+  const [rol] = useState(()=>{
+    let token = JSON.parse(localStorage.getItem('token'));
+    return token['user_rol'];
+  })
   const [secondHour,setSecondHour] = useState('')
   const [selectedDay, setSelectedDay] = useState('')
   const [donutOptions, setDonutOptions] = useState({'series':[],labels:[]})
