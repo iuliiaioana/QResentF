@@ -12,6 +12,7 @@ import Register from './routes/register/Register';
 import Statistics from './routes/Statistics';
 import Subjects from './routes/Subjects';
 import Profile from './routes/profile/Profile';
+import Admin from './routes/admin/Admin';
 
 import QrZone from './routes/scan/qrZone';
 
@@ -30,7 +31,7 @@ function App() {
         <div className="content">
           <Switch>
             <Route exact path ="/">
-              <Calendar />
+              <Login setToken={setToken} />
             </Route>
             <Route path="/login">
               <Login setToken={setToken} />
@@ -52,6 +53,9 @@ function App() {
             </Route>
             <Route path="/profile">
               <Profile />
+            </Route>
+            <Route path="/admin">
+              <Admin />
             </Route>
             <Route path="/qr">
               <QrZone />

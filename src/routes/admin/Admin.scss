@@ -1,0 +1,24 @@
+$breakpoint-mobile: 1200px;
+
+.admin-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    .studentList, .professorList {
+        width: 50%;
+    }
+
+    .add-button {
+        margin-left: 45%;
+    }
+
+    h2 {
+        text-align: center;
+    }
+}
+
+
+@media (max-width: $breakpoint-mobile) {
+
+}

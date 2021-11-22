@@ -14,12 +14,14 @@ import TodayIcon from '@mui/icons-material/Today';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 import { useHistory } from "react-router-dom";
 
 export default function MenuDrawer(props) {
 
   let history = useHistory();
+  let token = JSON.parse(localStorage['token']);
 
   const studentList = () => (
     <Box
@@ -29,21 +31,28 @@ export default function MenuDrawer(props) {
       onKeyDown={props.toggleFunction(false)}
     >
       <List>
-        <ListItem button onClick={ () => history.push("/subjects") }>
+        <ListItem button onClick={() => history.push("/subjects")}>
           <ListItemIcon>
             <MenuBookIcon />
           </ListItemIcon>
           <ListItemText primary="Subjects" />
         </ListItem>
 
-        <ListItem button onClick={ () => history.push("/calendar") }>
+        <ListItem button onClick={() => history.push("/calendar")}>
           <ListItemIcon>
             <TodayIcon />
           </ListItemIcon>
           <ListItemText primary="Calendar" />
         </ListItem>
 
-        <ListItem button onClick={ () => history.push("/statistics") }>
+        <ListItem button onClick={() => history.push("/attendance-list")}>
+          <ListItemIcon>
+            <ListIcon />
+          </ListItemIcon>
+          <ListItemText primary="Attendance List" />
+        </ListItem>
+
+        <ListItem button onClick={() => history.push("/statistics")}>
           <ListItemIcon>
             <QueryStatsIcon />
           </ListItemIcon>
@@ -52,23 +61,32 @@ export default function MenuDrawer(props) {
       </List>
 
       <Divider />
-      
+
       <List>
-        <ListItem button onClick={ () => history.push("/profile") }>
+        <ListItem button onClick={() => history.push("/profile")}>
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
           <ListItemText primary="Profile" />
         </ListItem>
-          
-        <ListItem button onClick={ () => history.push("/qr") }>
+
+        {token.user_rol == 'admin' ?
+          <ListItem button onClick={() => history.push("/admin")}>
+            <ListItemIcon>
+              <AdminPanelSettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Administrator page" />
+          </ListItem>
+          : ''}
+
+        <ListItem button onClick={() => history.push("/qr")}>
           <ListItemIcon>
             <QrCodeScannerIcon />
           </ListItemIcon>
           <ListItemText primary="Scan a code" />
         </ListItem>
-    
-        <ListItem button onClick={ () => logout(history) }>
+
+        <ListItem button onClick={() => logout(history)}>
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
@@ -119,6 +137,15 @@ export default function MenuDrawer(props) {
 
   return (
     <div>
+<<<<<<< HEAD
+      <Drawer
+        anchor="left"
+        open={props.open}
+        onClose={props.toggleFunction(false)}
+      >
+        {studentList()}
+      </Drawer>
+=======
         <Drawer
           anchor="left"
           open={props.open}
@@ -126,6 +153,7 @@ export default function MenuDrawer(props) {
         >
           {switchList()}
         </Drawer>
+>>>>>>> 4c2eeb57576e722cfdcc1736f5c54fed2be0715a
     </div>
   );
 }
