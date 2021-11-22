@@ -33,6 +33,7 @@ export default function Statistics() {
   const [secondHour,setSecondHour] = useState('')
   const [selectedDay, setSelectedDay] = useState('')
   const [donutOptions, setDonutOptions] = useState({'series':[],labels:[]})
+  const [actData, setActData] = useState({'series':[],labels:[]})
   const [barOptions, setBarOptions] = useState({options: {
                                                           chart: {
                                                             id: "basic-bar"
@@ -107,6 +108,16 @@ export default function Statistics() {
          setDonutOptions(donut)
          l1 = []
          l2 = []
+         Object.entries(res.ActDataStatus["28"]["22.11.2021"]).map(([key, value]) => {
+          l1.push(key)
+          l2.push(value)
+         })
+         let actData = {}
+         actData['series'] = l2
+         actData['labels'] = l1
+         setActData(actData)
+         l1 = []
+         l2 = []
          Object.entries(res.ProfSubNo).map(([key, value]) => {
           l1.push(key)
           l2.push(value)
@@ -157,7 +168,7 @@ export default function Statistics() {
                         Pick date for statistics
                       </div>
                     <DatePicker
-                                    format="YYYY-MM-DD"
+                                    format="DD-MM-YYYY"
                                     bordered={true}
                                     onChange={(date, dateString)=>{
                                       console.log(dateString)
@@ -246,6 +257,7 @@ export default function Statistics() {
                   body['id_prof'] = selectedSubject['id_profesor']
                   body['materie'] = selectedSubject['nume']
                   body['data'] = date.replaceAll('-','.')
+                  console.log(body);
                   getStatistics(body)
                 }}>
                 {'Search'}</Button>
@@ -261,6 +273,10 @@ export default function Statistics() {
                 <div>
                   <div>Groups per activity</div>
                 <Chart options={{labels:donutOptions.labels}} series={donutOptions.series} type="donut" width="380" />
+                </div>
+                <div>
+                  <div>Attendance per interval</div>
+                <Chart options={{labels:actData.labels}} series={actData.series} type="donut" width="380" />
                 </div>
                 <div>
                   <div>Subjects per professor</div>
