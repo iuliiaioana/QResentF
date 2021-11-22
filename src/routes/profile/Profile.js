@@ -42,9 +42,6 @@ export default function Profile() {
           <h4>{userData.grupa}</h4>
         </div>
       </div>
-      <div className="flex-item column-container">
-        <h3>Other info later</h3>
-      </div>
       <div className="flex-item">
 
       </div>

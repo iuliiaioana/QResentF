@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useHistory } from "react-router-dom";
 import { ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { FixedSizeList as List } from 'react-window';
 import AutoSizer from "react-virtualized-auto-sizer"
@@ -7,6 +8,11 @@ import AutoSizer from "react-virtualized-auto-sizer"
 import './Calendar.scss';
 
 export default function Calendar() {
+
+    let history = useHistory();
+    if (localStorage.getItem("status") !== "loggedIn") {
+        history.push("/login");
+    }
 
     const dayOfWeek = ['Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sambata', 'Duminica'];
     const date = new Date();
