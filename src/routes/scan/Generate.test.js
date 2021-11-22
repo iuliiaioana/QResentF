@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom'
-
 import {render, fireEvent, screen, container} from '@testing-library/react'
 import Generate from './Generate'
+
+// comment the lines involving history before testing 
+// they are related to log in logic and mess up the test
 
 test('Test QR visible on init', async () => {
     render(<Generate />);

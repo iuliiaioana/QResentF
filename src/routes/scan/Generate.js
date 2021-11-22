@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useHistory } from "react-router-dom";
 import QRCode from "react-qr-code";
 import Button from '@mui/material/Button';
 
@@ -28,39 +29,44 @@ async function getActivityId(payload) {
     }); 
 }
 
+
 export default function Generate() {
 
-    const [dateTime, setDateTime] = useState(new Date().fixTimezone().toISOString());
-    const [isOpened, setIsOpened] = useState(true);
-    
+    let history = useHistory();
+    if (localStorage.getItem("status") !== "loggedIn") {
+        history.push("/login");
+    }
+    let token = JSON.parse(localStorage['token']);
+    let id_user = token.user_id;
+    console.log(id_user);
+
     const [activityId, setActivityId] = useState("");
+    const [dateTime, setDateTime] = useState(new Date().fixTimezone().toISOString());
+    const [isOpened, setIsOpened] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setDateTime(new Date().fixTimezone().toISOString());
-        }, 10000);
+        }, 60000);
         return () => clearInterval(interval);
         }, []);
     
 
- //   let qrValue =  activityId + "," + dateTime;
-        
-    let qrValue =  "12," + dateTime;
+    let qrValue =  activityId + "," + dateTime;
 
     const handleGenerate = async data => {
         setIsOpened(true);
         setDateTime(new Date().fixTimezone().toISOString());
-        // const id = await getActivityId({
-        //     profesor_id: "3"  // localStorage.getItem('id_user');
-        // });
-        // console.log(id['activitate_id'])
-        // setActivityId(id['activitate_id']);
+        const id = await getActivityId({
+            profesor_id: id_user
+        });
+        console.log(id['activitate_id'])
+        setActivityId(id['activitate_id']);
     }
 
     const handleHide = () => {
         setIsOpened(false);
     }
-
 
     return (
         <div>
@@ -70,10 +76,11 @@ export default function Generate() {
                 <QRCode className="qr-code" value={qrValue}  />
             </div>}
 
-            <div className="flex-container"> 
+            <div className="flex-container">
+                {isOpened && 
                 <div className="flex-element">
                     <Button data-testid="hide" className="button" variant="outlined" onClick={handleHide}>Hide QR</Button>
-                </div>
+                </div>} 
                 <div className="flex-element">
                     <Button data-testid="gen" className="button" variant="contained" onClick={handleGenerate}>Generate QR</Button>
                 </div>

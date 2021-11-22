@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import QrReader from 'react-qr-reader';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useHistory } from "react-router-dom";
 import Dialog from '@mui/material/Dialog';
 
 import './Scan.scss';
@@ -36,6 +37,14 @@ function SimpleDialog(props) {
 
 export default function Scan() {
 
+    let history = useHistory();
+    if (localStorage.getItem("status") !== "loggedIn") {
+        history.push("/login");
+    }
+    let token = JSON.parse(localStorage['token']);
+    let id_user = token.user_id;
+    console.log(id_user);
+
     const [scan, setScan] = useState("no result");
     const [oldScans, setOldScans] = useState(["no result"]);
     const [oldScan, setOldScan] = useState("no result");
@@ -60,7 +69,7 @@ export default function Scan() {
                 const err = await sendQRCode({
                     activitate_id: beans[0],
                     ora_qr: beans[1],
-                    user_id: "2" // localStorage.getItem('id_user');
+                    user_id: id_user
                 });
                 setOpen(true);
                 if (err === undefined) {
